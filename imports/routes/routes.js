@@ -8,11 +8,12 @@ import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Homepage from '../ui/Homepage';
 
-const unauthenticatedPages = ['/', '/signup'];
+const unauthenticatedPages = ['/login', '/signup'];
 const authenticatedPages = ['/dashboard'];
 const onEnterPublicPage = () => {
+  debugger;
   if (Meteor.userId()) {
-    browserHistory.replace('/dashboard');
+    browserHistory.replace('/');
   }
 };
 const onEnterPrivatePage = () => {
@@ -26,7 +27,7 @@ export const onAuthChange = (isAuthenticated) => {
   const isAuthenticatedPage = authenticatedPages.includes(pathname);
 
   if (isUnauthenticatedPage && isAuthenticated) {
-    browserHistory.replace('/dashboard');
+    browserHistory.replace('/');
   } else if (isAuthenticatedPage && !isAuthenticated) {
     browserHistory.replace('/');
   }
@@ -34,6 +35,7 @@ export const onAuthChange = (isAuthenticated) => {
 export const routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Homepage}/>
+    <Route path="/login" component={Login} onEnter={onEnterPublicPage}/>
     <Route path="/signup" component={Signup} onEnter={onEnterPublicPage}/>
     <Route path="/dashboard" component={Dashboard} onEnter={onEnterPrivatePage}/>
     <Route path="*" component={NotFound}/>

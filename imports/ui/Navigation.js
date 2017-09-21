@@ -8,8 +8,8 @@ export default class Navigation extends React.Component {
         <a>Bags & Pouches</a> |
         <a>Babies & Kids</a> |
         <a>Travel Essentials</a> |
-        <a>About us</a> |
-        <a>Contact us</a>
+        <a href="#how_to_order">How To Order</a> |
+        <a href="#contact_us">Contact us</a>
       </div>
     );
   }

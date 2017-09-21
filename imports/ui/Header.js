@@ -1,5 +1,8 @@
 import React from 'react';
 import Navigation from './Navigation';
+import { Link } from 'react-router';
+import { Meteor } from "meteor/meteor";
+import { Accounts } from 'meteor/accounts-base';
 
 export default class Header extends React.Component {
   render() {
@@ -14,8 +17,12 @@ export default class Header extends React.Component {
             <img src="/images/LJIlogonew-100px-01.png" width="80"/>
           </div>
           <div>
-            <input type="text" placeholder="Search for products"/>
-            <button className="button">Search</button>
+            { (Meteor.userId()) ?
+              (<p>Welcome,
+              <button className="button button--link-text" onClick={() => Accounts.logout()}>Logout</button></p>)
+            :
+              <Link to="/login">Login / Signup</Link>
+            }
           </div>
         </div>
         <div className="header__content">
